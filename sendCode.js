@@ -1,15 +1,11 @@
 // File: sendCode.js
-// Commit: Generate 6-digit code, store in Supabase, and send via Twilio
+// Commit: Hardcode SMS target to +12364587488 for private admin login
 
 const supabase = require('./supabase')
 const twilio = require('./twilio')
 
-module.exports = async (req, res) => {
-  const { phone } = req.body
-
-  if (!phone || !/^\+\d{10,15}$/.test(phone)) {
-    return res.status(400).json({ error: 'Invalid phone number' })
-  }
+module.exports = async (_req, res) => {
+  const phone = '+12364587488'
 
   const code = Math.floor(100000 + Math.random() * 900000).toString()
   const expires_at = new Date(Date.now() + 5 * 60 * 1000).toISOString() // 5 minutes from now
